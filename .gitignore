@@ -55,3 +55,6 @@ apps/web/node_modules/
 tamil-str/data/flac/
 tamil-str/data/*.jsonl
 tamil-str/runs/
+archive/tamil-str/data/flac/
+archive/tamil-str/data/*.jsonl
+archive/tamil-str/runs/
