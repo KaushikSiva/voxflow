@@ -38,6 +38,7 @@ Training scripts are organized as one file per step in `training/`:
 4. `step_04_make_smoketest_subsets.py`
 5. `step_05_train_voxtral_qlora.py`
 6. `step_06_inference_check_gpu.py`
+7. `step_07_backfill_wandb.py`
 
 Use the full instructions and commands in:
 

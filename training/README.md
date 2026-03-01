@@ -10,6 +10,7 @@ This folder contains one script per training step.
 4. `step_04_make_smoketest_subsets.py`
 5. `step_05_train_voxtral_qlora.py`
 6. `step_06_inference_check_gpu.py`
+7. `step_07_backfill_wandb.py`
 
 ## Prerequisites
 
@@ -121,6 +122,33 @@ python training/step_06_inference_check_gpu.py \
   --language ta \
   --max_new_tokens 256
 ```
+
+### 7) Retrospective W&B backfill (existing model/runs)
+
+For your adapter on Hugging Face (`kaushiksiva/voxtral-mini-3b-tamil-lora`):
+
+```bash
+python training/step_07_backfill_wandb.py \
+  --wandb_project mistral-hackathon \
+  --wandb_run_name voxtral-ta-retro \
+  --model_repo kaushiksiva/voxtral-mini-3b-tamil-lora \
+  --checkpoints_dir runs/voxtral_lora_full/checkpoints \
+  --allow_hf_download
+```
+
+If you want artifact upload from a local adapter directory instead of HF:
+
+```bash
+python training/step_07_backfill_wandb.py \
+  --wandb_project mistral-hackathon \
+  --wandb_run_name voxtral-ta-retro-local \
+  --local_adapter_dir runs/voxtral_lora_full \
+  --checkpoints_dir runs/voxtral_lora_full/checkpoints
+```
+
+What step 07 logs:
+- checkpoint timeline points (`step`, `epoch`, `micro`, `saved_at_unix`) if `trainer_state.pt` files exist
+- model artifact to W&B (from local adapter dir or HF model repo)
 
 ## Notes on dedup/cleanup
 
