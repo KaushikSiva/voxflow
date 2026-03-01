@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-6e.py (Voxtral QLoRA trainer — Fix A + Option1 + robust masking + token-weighted logging)
+Step 05: Voxtral QLoRA trainer (Fix A + Option 1 + robust masking + token-weighted logging)
 
 Base model:
   mistralai/Voxtral-Mini-3B-2507
@@ -875,4 +875,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
