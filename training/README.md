@@ -92,6 +92,25 @@ python training/step_05_train_voxtral_qlora.py \
   --grad_accum 8
 ```
 
+Optional: enable W&B tracking (hackathon step 3 style):
+
+```bash
+python training/step_05_train_voxtral_qlora.py \
+  --train_jsonl data/train_flac.jsonl \
+  --out_dir runs/voxtral_lora_full \
+  --epochs 1 \
+  --batch_size 1 \
+  --grad_accum 8 \
+  --wandb \
+  --wandb_project mistral-hackathon \
+  --wandb_run_name voxtral-ta-run-01
+```
+
+When `--wandb` is enabled, the trainer will:
+- initialize a W&B run
+- log training metrics (`loss`, `lr`, `label_frac`, `steps/s`)
+- upload `out_dir` as a model artifact at the end
+
 ### 6) GPU inference check / evaluation
 
 ```bash

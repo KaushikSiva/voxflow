@@ -32,7 +32,7 @@ import os
 import random
 import time
 from dataclasses import dataclass
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 import torch
 import torch.nn.functional as F
@@ -52,6 +52,11 @@ try:
 except Exception:
     get_peft_model_state_dict = None
     set_peft_model_state_dict = None
+
+try:
+    import wandb
+except Exception:
+    wandb = None
 
 
 # -----------------------------
@@ -643,6 +648,13 @@ def main():
     # Debug
     ap.add_argument("--debug_label_frac", action="store_true", default=True)
 
+    # W&B (optional)
+    ap.add_argument("--wandb", action="store_true", help="Enable Weights & Biases logging.")
+    ap.add_argument("--wandb_project", type=str, default="mistral-hackathon")
+    ap.add_argument("--wandb_entity", type=str, default="")
+    ap.add_argument("--wandb_run_name", type=str, default="")
+    ap.add_argument("--wandb_artifact_name", type=str, default="mistral-lora-adapter")
+
     args = ap.parse_args()
 
     load_in_4bit = not args.no_4bit
@@ -658,6 +670,18 @@ def main():
     print(f"Precision: {'bf16' if bf16 else 'fp16'}")
     print("4-bit:", load_in_4bit)
     print("mask_prompt_loss:", mask_prompt_loss)
+
+    wandb_run: Optional[Any] = None
+    if args.wandb:
+        if wandb is None:
+            raise RuntimeError("wandb is not installed. Install with: pip install wandb")
+        wandb_kwargs: Dict[str, Any] = {"project": args.wandb_project}
+        if args.wandb_entity:
+            wandb_kwargs["entity"] = args.wandb_entity
+        if args.wandb_run_name:
+            wandb_kwargs["name"] = args.wandb_run_name
+        wandb_run = wandb.init(**wandb_kwargs)
+        wandb.config.update(vars(args))
 
     model, processor = build_model_and_processor(
         base_model=args.base,
@@ -828,6 +852,17 @@ def main():
                             f"lr={sched.get_last_lr()[0]:.2e} "
                             f"steps/s={rate:.3f}"
                         )
+                        if wandb_run is not None:
+                            wandb.log(
+                                {
+                                    "train/loss": avg_loss,
+                                    "train/label_frac": label_frac_window,
+                                    "train/lr": sched.get_last_lr()[0],
+                                    "train/steps_per_sec": rate,
+                                    "train/step": step,
+                                    "train/epoch": epoch + 1,
+                                }
+                            )
 
                     if args.save_every_steps > 0 and step % args.save_every_steps == 0:
                         ckpt_dir = save_training_checkpoint(
@@ -869,6 +904,12 @@ def main():
         processor.save_pretrained(args.out_dir)
     except Exception as e:
         print("processor.save_pretrained failed (ok):", e)
+
+    if wandb_run is not None:
+        artifact = wandb.Artifact(args.wandb_artifact_name, type="model")
+        artifact.add_dir(args.out_dir)
+        wandb.log_artifact(artifact)
+        wandb.finish()
 
     print("✅ Done. Next: run an inference sanity-check on a few dev samples.")
 
