@@ -9,6 +9,7 @@ This folder contains one script per training step.
 3. `step_03_split_train_dev.py`
 4. `step_04_make_smoketest_subsets.py`
 5. `step_05_train_voxtral_qlora.py`
+6. `step_06_inference_check_gpu.py`
 
 ## Prerequisites
 
@@ -91,9 +92,20 @@ python training/step_05_train_voxtral_qlora.py \
   --grad_accum 8
 ```
 
+### 6) GPU inference check / evaluation
+
+```bash
+python training/step_06_inference_check_gpu.py \
+  --adapter runs/voxtral_lora_full \
+  --jsonl data/dev_flac.jsonl \
+  --limit 20 \
+  --language ta \
+  --max_new_tokens 256
+```
+
 ## Notes on dedup/cleanup
 
 - Removed duplicate trainer variants in this folder.
 - Kept a single trainer for step 05: `step_05_train_voxtral_qlora.py`.
-- Moved inference/eval script out of training:
-  - `inference/step_02_eval_lora_transcribe_jsonl.py`
+- Kept inference/eval check in training as step 06:
+  - `step_06_inference_check_gpu.py`
