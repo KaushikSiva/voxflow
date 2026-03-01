@@ -1,0 +1,50 @@
+:root {
+  --background: 0 0% 99%;
+  --foreground: 0 0% 8%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 8%;
+  --muted: 0 0% 95%;
+  --muted-foreground: 0 0% 40%;
+  --primary: 0 0% 8%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 0 0% 22%;
+  --accent-foreground: 0 0% 100%;
+  --border: 0 0% 86%;
+  --destructive: 0 68% 46%;
+  --destructive-foreground: 0 0% 100%;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  color: hsl(var(--foreground));
+  font-family: "DM Sans", "Avenir Next", "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #ffffff, #f7f7f7);
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Space Grotesk", "Avenir Next", sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
