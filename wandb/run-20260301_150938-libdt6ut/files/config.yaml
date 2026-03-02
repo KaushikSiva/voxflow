@@ -1,0 +1,77 @@
+_wandb:
+    value:
+        cli_version: 0.25.0
+        e:
+            n41u1ox86947e5y0hzt9m2g90jdb4yz0:
+                apple:
+                    ecpuCores: 6
+                    gpuCores: 10
+                    memoryGb: 24
+                    name: Apple M4
+                    pcpuCores: 4
+                    ramTotalBytes: "25769803776"
+                    swapTotalBytes: "12884901888"
+                args:
+                    - --wandb_project
+                    - mistral-hackathon
+                    - --wandb_run_name
+                    - voxtral-ta-retro
+                    - --model_repo
+                    - kaushiksiva/voxtral-mini-3b-tamil-lora
+                    - --checkpoints_dir
+                    - runs/voxtral_lora_full/checkpoints
+                    - --allow_hf_download
+                codePath: training/step_07_backfill_wandb.py
+                codePathLocal: training/step_07_backfill_wandb.py
+                cpu_count: 10
+                cpu_count_logical: 10
+                disk:
+                    /:
+                        total: "245107195904"
+                        used: "194834919424"
+                email: kaushik.siva88@gmail.com
+                executable: /Users/kaushiksivakumar/workspace/fine-tuned-tamil/venv/bin/python
+                git:
+                    commit: 92186950e005a5d7ba15e6256cda18d6e9de0a4a
+                    remote: https://github.com/KaushikSiva/voxflow.git
+                host: Brock.local
+                memory:
+                    total: "25769803776"
+                os: macOS-26.3-arm64-arm-64bit
+                program: /Users/kaushiksivakumar/workspace/fine-tuned-tamil/training/step_07_backfill_wandb.py
+                python: CPython 3.12.4
+                root: /Users/kaushiksivakumar/workspace/fine-tuned-tamil
+                startedAt: "2026-03-01T23:09:38.061261Z"
+                writerId: n41u1ox86947e5y0hzt9m2g90jdb4yz0
+        m: []
+        python_version: 3.12.4
+        t:
+            "1":
+                - 49
+            "2":
+                - 49
+            "3":
+                - 2
+                - 13
+                - 16
+                - 62
+            "4": 3.12.4
+            "5": 0.25.0
+            "12": 0.25.0
+            "13": darwin-arm64
+allow_hf_download:
+    value: true
+artifact_name:
+    value: mistral-lora-adapter
+checkpoints_dir:
+    value: runs/voxtral_lora_full/checkpoints
+local_adapter_dir:
+    value: ""
+model_repo:
+    value: kaushiksiva/voxtral-mini-3b-tamil-lora
+wandb_entity:
+    value: ""
+wandb_project:
+    value: mistral-hackathon
+wandb_run_name:
+    value: voxtral-ta-retro

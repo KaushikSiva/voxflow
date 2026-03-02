@@ -1,0 +1,48 @@
+{
+  "os": "macOS-26.3-arm64-arm-64bit",
+  "python": "CPython 3.12.4",
+  "startedAt": "2026-03-01T23:09:38.061261Z",
+  "args": [
+    "--wandb_project",
+    "mistral-hackathon",
+    "--wandb_run_name",
+    "voxtral-ta-retro",
+    "--model_repo",
+    "kaushiksiva/voxtral-mini-3b-tamil-lora",
+    "--checkpoints_dir",
+    "runs/voxtral_lora_full/checkpoints",
+    "--allow_hf_download"
+  ],
+  "program": "/Users/kaushiksivakumar/workspace/fine-tuned-tamil/training/step_07_backfill_wandb.py",
+  "codePath": "training/step_07_backfill_wandb.py",
+  "codePathLocal": "training/step_07_backfill_wandb.py",
+  "git": {
+    "remote": "https://github.com/KaushikSiva/voxflow.git",
+    "commit": "92186950e005a5d7ba15e6256cda18d6e9de0a4a"
+  },
+  "email": "kaushik.siva88@gmail.com",
+  "root": "/Users/kaushiksivakumar/workspace/fine-tuned-tamil",
+  "host": "Brock.local",
+  "executable": "/Users/kaushiksivakumar/workspace/fine-tuned-tamil/venv/bin/python",
+  "cpu_count": 10,
+  "cpu_count_logical": 10,
+  "disk": {
+    "/": {
+      "total": "245107195904",
+      "used": "194834919424"
+    }
+  },
+  "memory": {
+    "total": "25769803776"
+  },
+  "apple": {
+    "name": "Apple M4",
+    "ecpuCores": 6,
+    "pcpuCores": 4,
+    "gpuCores": 10,
+    "memoryGb": 24,
+    "swapTotalBytes": "12884901888",
+    "ramTotalBytes": "25769803776"
+  },
+  "writerId": "n41u1ox86947e5y0hzt9m2g90jdb4yz0"
+}

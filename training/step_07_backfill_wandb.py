@@ -11,9 +11,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional
 
-import torch
-import wandb
 from huggingface_hub import snapshot_download
+
+wandb = None
 
 
 @dataclass
@@ -35,6 +35,14 @@ def parse_step_from_dir(path: Path) -> int:
 def collect_checkpoint_points(checkpoints_dir: Path) -> List[CheckpointPoint]:
     points: List[CheckpointPoint] = []
     if not checkpoints_dir.exists():
+        return points
+    try:
+        import torch  # local import: avoid hard failure when torch env is incompatible
+    except Exception as exc:
+        print(
+            "[warn] torch import failed; skipping checkpoint timeline backfill.\n"
+            f"       reason: {exc}"
+        )
         return points
 
     for trainer_state in sorted(checkpoints_dir.rglob("trainer_state.pt")):
@@ -140,6 +148,18 @@ def main() -> None:
         help="Directory containing step_*/trainer_state.pt files.",
     )
     args = ap.parse_args()
+
+    global wandb
+    try:
+        import wandb as _wandb
+    except ModuleNotFoundError as exc:
+        raise RuntimeError(
+            "wandb is not installed in this Python environment. "
+            "Install and retry:\n"
+            "  pip install wandb\n"
+            "If you are using a virtualenv, activate it first."
+        ) from exc
+    wandb = _wandb
 
     wandb_kwargs = {
         "project": args.wandb_project,

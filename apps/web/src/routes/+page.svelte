@@ -482,13 +482,13 @@
 </script>
 
 <svelte:head>
-  <title>Tamil Voice Flow</title>
+  <title>VoxFlow</title>
 </svelte:head>
 
 <main class="container page">
   <header class="topbar">
     <div>
-      <h1>Tamil Voice Flow</h1>
+      <h1>VoxFlow</h1>
       <p>ASR -> English Mixed -> Raw English</p>
     </div>
     <div class="badges">

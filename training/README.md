@@ -17,7 +17,9 @@ This folder contains one script per training step.
 ```bash
 python -m venv .venv
 source .venv/bin/activate
+pip install -U "numpy<2"
 pip install -U huggingface_hub pyarrow
+pip install -U wandb
 pip install -U transformers peft bitsandbytes accelerate soundfile
 pip install -U "mistral-common[audio]"
 ```

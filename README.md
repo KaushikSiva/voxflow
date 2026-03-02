@@ -1,4 +1,4 @@
-# Tamil Voice Flow
+# VoxFlow
 
 This repository now includes a Wispr-style Tamil dictation pipeline:
 

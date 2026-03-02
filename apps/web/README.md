@@ -1,4 +1,4 @@
-# Tamil Voice Flow Web (SvelteKit + shadcn-style UI)
+# VoxFlow Web (SvelteKit + shadcn-style UI)
 
 ## Features
 
